@@ -3,7 +3,9 @@ setlocal EnableExtensions
 chcp 65001 >nul
 title MOEX Price Scanner - обновление
 
-set "REPO_DIR=%~dp0"
+rem %~dp0 ends with a backslash. Normalize "%~dp0." so the quoted
+rem path cannot end with \" and break Windows command-line parsing.
+for %%I in ("%~dp0.") do set "REPO_DIR=%%~fI"
 
 echo.
 echo MOEX Price Scanner: проверка обновлений
@@ -13,10 +15,10 @@ echo.
 where git >nul 2>nul
 if errorlevel 1 goto no_git
 
-git -C "%REPO_DIR%" rev-parse --is-inside-work-tree >nul 2>nul
+git -C "%REPO_DIR%" rev-parse --is-inside-work-tree >nul
 if errorlevel 1 goto no_repo
 
-git -C "%REPO_DIR%" remote get-url origin >nul 2>nul
+git -C "%REPO_DIR%" remote get-url origin >nul
 if errorlevel 1 goto no_remote
 
 git -C "%REPO_DIR%" diff --quiet --ignore-submodules --
