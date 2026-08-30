@@ -1,0 +1,180 @@
+/* MOEX Scanner widget — fixed overlay в стиле тёмной темы терминала. */
+
+#moex-scanner-root {
+  position: fixed;
+  z-index: 2147483000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  color: #e6e9ee;
+  background: #1a1d23;
+  border: 1px solid #2c313a;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  width: 480px;
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+#moex-scanner-root.mscan-pos-tr {
+  top: 80px;
+  right: 16px;
+}
+
+.mscan-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #15181d;
+  border-bottom: 1px solid #2c313a;
+  border-radius: 6px 6px 0 0;
+  cursor: move;
+}
+
+.mscan-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffd028;
+}
+
+.mscan-title {
+  font-weight: 600;
+  font-size: 13px;
+  flex: 0 0 auto;
+}
+
+.mscan-status {
+  margin-left: auto;
+  font-size: 11px;
+  color: #8a92a0;
+}
+.mscan-status.mscan-ok { color: #6fcf97; }
+.mscan-status.mscan-err { color: #eb5757; }
+
+.mscan-btn {
+  background: transparent;
+  border: 1px solid #2c313a;
+  color: #c8cdd6;
+  font-size: 12px;
+  width: 24px;
+  height: 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.mscan-btn:hover { background: #2a2f37; }
+
+.mscan-body {
+  overflow: auto;
+  max-height: calc(60vh - 36px);
+}
+
+#moex-scanner-root.mscan-collapsed .mscan-body { display: none; }
+
+.mscan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.mscan-table thead th {
+  position: sticky;
+  top: 0;
+  background: #15181d;
+  text-align: left;
+  font-weight: 500;
+  font-size: 11px;
+  color: #8a92a0;
+  padding: 6px 10px;
+  border-bottom: 1px solid #2c313a;
+}
+
+.mscan-table tbody td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #232830;
+}
+
+.mscan-row.mscan-up td.mscan-col-delta,
+.mscan-row.mscan-up td.mscan-col-ticker { color: #6fcf97; font-weight: 600; }
+
+.mscan-row.mscan-down td.mscan-col-delta,
+.mscan-row.mscan-down td.mscan-col-ticker { color: #eb5757; font-weight: 600; }
+
+.mscan-row:hover td { background: #1f242c; }
+
+.mscan-col-ticker { width: 70px; }
+.mscan-col-delta { width: 130px; }
+.mscan-col-price { width: 130px; }
+.mscan-col-time  { width: 70px; color: #8a92a0; }
+.mscan-col-actions { width: 56px; text-align: right; padding-right: 8px !important; }
+
+.mscan-act {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #8a92a0;
+  font-size: 13px;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  padding: 0;
+  cursor: pointer;
+  line-height: 1;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+.mscan-act:hover { background: #2a2f37; color: #e6e9ee; border-color: #3a414c; }
+.mscan-act.mscan-act-on { color: #ffd028; }
+.mscan-act.mscan-act-hide:hover { color: #eb5757; }
+
+.mscan-table tbody td.mscan-col-ticker {
+  cursor: pointer;
+  text-decoration: underline dotted transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s;
+}
+.mscan-table tbody td.mscan-col-ticker:hover {
+  text-decoration-color: #ffd028;
+}
+
+.mscan-toast {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translate(-50%, -8px);
+  background: #15181d;
+  border: 1px solid #2c313a;
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: #e6e9ee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+}
+.mscan-toast[data-kind="ok"] { border-color: #6fcf97; }
+.mscan-toast[data-kind="err"] { border-color: #eb5757; }
+.mscan-toast.mscan-toast-show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.mscan-empty td {
+  text-align: center;
+  color: #8a92a0;
+  padding: 14px;
+  font-style: italic;
+}
+
+@keyframes mscan-flash {
+  0% { background: rgba(255, 208, 40, 0.15); }
+  100% { background: transparent; }
+}
+.mscan-row {
+  animation: mscan-flash 1.2s ease-out;
+}

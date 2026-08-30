@@ -1,0 +1,8 @@
+* text=auto
+
+*.css text eol=lf
+*.cmd text eol=crlf
+*.html text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf

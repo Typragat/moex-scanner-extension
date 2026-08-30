@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "MOEX Price Scanner",
+  "version": "0.1.1",
+  "description": "Сканер резких движений цены MOEX для веб-терминала Т-Инвестиций на www.tbank.ru/terminal.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://invest-public-api.tbank.ru/*",
+    "https://iss.moex.com/*",
+    "https://www.tbank.ru/*",
+    "https://www.tinkoff.ru/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.tbank.ru/terminal/*",
+        "https://www.tinkoff.ru/terminal/*"
+      ],
+      "js": ["content.js"],
+      "css": ["widget.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MOEX Price Scanner"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "lib/api.js",
+        "lib/instruments.js",
+        "lib/scanner.js"
+      ],
+      "matches": [
+        "https://www.tbank.ru/*",
+        "https://www.tinkoff.ru/*"
+      ]
+    }
+  ]
+}

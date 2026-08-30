@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>MOEX Price Scanner</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>MOEX Price Scanner</h1>
+    <span id="status" class="status">…</span>
+  </header>
+
+  <section class="block">
+    <label class="row">
+      <span class="lbl">T-Invest API токен</span>
+      <input type="password" id="token" placeholder="t.xxxxxxxxxxxxx" />
+    </label>
+    <p class="hint">
+      Получить токен (read-only достаточно):
+      <a href="https://www.tinkoff.ru/invest/settings/api/" target="_blank" rel="noopener">tinkoff.ru/invest/settings/api</a>
+    </p>
+  </section>
+
+  <section class="block">
+    <div class="row">
+      <span class="lbl">Порог изменения, %</span>
+      <input type="number" id="thresholdPct" min="0.05" max="20" step="0.05" />
+    </div>
+    <div class="row">
+      <span class="lbl">Окно, секунд</span>
+      <select id="windowSec">
+        <option value="60">60 (1 мин)</option>
+        <option value="120">120 (2 мин)</option>
+        <option value="300">300 (5 мин)</option>
+        <option value="600">600 (10 мин)</option>
+      </select>
+    </div>
+    <div class="row">
+      <span class="lbl">Cooldown, секунд</span>
+      <input type="number" id="cooldownSec" min="5" max="600" step="5" />
+    </div>
+    <div class="row">
+      <span class="lbl">TTL записей, секунд</span>
+      <input type="number" id="ttlSec" min="30" max="3600" step="30" />
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="lbl bold">Инструменты</div>
+    <label class="check"><input type="checkbox" id="filterImoex" /> Акции IMOEX</label>
+    <label class="check"><input type="checkbox" id="filterShares" /> Все российские акции (MOEX)</label>
+    <label class="check"><input type="checkbox" id="filterFutures" /> Фьючерсы</label>
+  </section>
+
+  <section class="block">
+    <label class="check"><input type="checkbox" id="soundEnabled" /> Звуковой сигнал</label>
+  </section>
+
+  <section class="block tickers-block">
+    <div class="row tickers-head">
+      <span class="lbl bold">Тикеры</span>
+      <button id="tickers-toggle" class="ghost small" type="button">Показать</button>
+    </div>
+    <div id="tickers-pane" class="tickers-pane" hidden>
+      <input type="text" id="tickers-search" placeholder="Поиск по тикеру / названию…" />
+      <label class="check">
+        <input type="checkbox" id="interestingOnly" />
+        Сканировать только интересные (отмеченные ★)
+      </label>
+      <div class="tickers-legend">
+        <span><b>★</b> — интересный, <b>⊘</b> — скрыт</span>
+        <span id="tickers-counts"></span>
+      </div>
+      <div class="tickers-list" id="tickers-list">
+        <div class="tickers-empty">Список загрузится после первого скана…</div>
+      </div>
+      <div class="row tickers-io">
+        <button id="export-prefs" class="ghost small" type="button" title="Скачать JSON со списками">⬇ Экспорт</button>
+        <button id="import-prefs" class="ghost small" type="button" title="Загрузить JSON со списками">⬆ Импорт</button>
+        <input type="file" id="import-file" accept="application/json,.json" hidden />
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <button id="save" class="primary">Сохранить</button>
+    <button id="test">Тест-алерт</button>
+    <button id="clear" class="ghost">Очистить таблицу</button>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

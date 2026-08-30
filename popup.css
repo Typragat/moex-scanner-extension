@@ -1,0 +1,230 @@
+body {
+  margin: 0;
+  padding: 12px 14px;
+  width: 380px;
+  max-height: 580px;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  background: #1a1d23;
+  color: #e6e9ee;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 600;
+  flex: 0 0 auto;
+}
+
+.status {
+  margin-left: auto;
+  font-size: 11px;
+  color: #8a92a0;
+}
+.status.ok { color: #6fcf97; }
+.status.err { color: #eb5757; }
+
+.block {
+  border: 1px solid #2c313a;
+  border-radius: 4px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.lbl {
+  flex: 1;
+  color: #c8cdd6;
+}
+
+.lbl.bold { font-weight: 600; margin-bottom: 4px; }
+
+input[type=number],
+input[type=password],
+select {
+  background: #0f1115;
+  border: 1px solid #2c313a;
+  color: #e6e9ee;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  width: 130px;
+  font-family: inherit;
+}
+input[type=password] { width: 180px; }
+input:focus, select:focus { outline: 1px solid #ffd028; }
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 3px 0;
+  cursor: pointer;
+}
+
+.hint {
+  font-size: 11px;
+  color: #8a92a0;
+  margin: 4px 0 0;
+}
+
+.hint a { color: #ffd028; text-decoration: none; }
+.hint a:hover { text-decoration: underline; }
+
+footer {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+button {
+  background: #2c313a;
+  border: 1px solid #3a414c;
+  color: #e6e9ee;
+  padding: 6px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+}
+button:hover { background: #353b46; }
+
+button.primary {
+  background: #ffd028;
+  color: #1a1d23;
+  border-color: #ffd028;
+  font-weight: 600;
+}
+button.primary:hover { background: #ffdc55; }
+
+button.ghost {
+  background: transparent;
+  margin-left: auto;
+}
+
+button.small {
+  padding: 3px 8px;
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.tickers-head { margin: 0; }
+
+.tickers-pane {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#tickers-search {
+  width: 100%;
+  background: #0f1115;
+  border: 1px solid #2c313a;
+  color: #e6e9ee;
+  padding: 5px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+#tickers-search:focus { outline: 1px solid #ffd028; }
+
+.tickers-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #8a92a0;
+}
+
+.tickers-io {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.tickers-io button.small {
+  margin-left: 0;
+  flex: 0 0 auto;
+}
+
+.tickers-list {
+  border: 1px solid #2c313a;
+  border-radius: 3px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #0f1115;
+}
+
+.tickers-empty {
+  padding: 14px;
+  text-align: center;
+  color: #8a92a0;
+  font-style: italic;
+}
+
+.ticker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #1f242c;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.ticker-row:hover { background: #181c22; }
+.ticker-row:hover .tk { color: #ffd028; }
+.ticker-row.is-hidden { opacity: 0.45; }
+.ticker-row.is-interesting { background: rgba(255, 208, 40, 0.06); }
+.ticker-row.is-interesting:hover { background: rgba(255, 208, 40, 0.1); }
+
+.ticker-row .tk {
+  width: 70px;
+  font-weight: 600;
+  color: #e6e9ee;
+  flex: 0 0 auto;
+}
+
+.ticker-row .nm {
+  flex: 1;
+  color: #8a92a0;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ticker-row .acts {
+  display: flex;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+
+.ticker-row button.act {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #8a92a0;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1;
+}
+.ticker-row button.act:hover { background: #2a2f37; color: #e6e9ee; border-color: #3a414c; }
+.ticker-row button.act.on { color: #ffd028; }
+.ticker-row button.act.hide-on { color: #eb5757; }
